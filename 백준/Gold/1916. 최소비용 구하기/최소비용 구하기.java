@@ -60,18 +60,18 @@ public class Main {
 
         while (!queue.isEmpty()) {
             Node now = queue.poll();
-            
-            if(visited[now.end]) continue;
+
+            if (visited[now.end]) continue;
 
             for (Node next : al[now.end]) {
                 if (!visited[next.end]) {
                     if (next.weight + result[now.end] < result[next.end]) {
-                        visited[now.end] = true;
                         result[next.end] = next.weight + result[now.end];
                         queue.add(new Node(next.end, result[next.end]));
                     }
                 }
             }
+            visited[now.end] = true;
         }
     }
 }
