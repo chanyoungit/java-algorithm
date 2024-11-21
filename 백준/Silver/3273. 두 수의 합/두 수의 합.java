@@ -22,18 +22,20 @@ public class Main {
 
         int answer = 0;
         int s = 0;
-        int e = 0;
+        int e = n - 1;
         int sum = 0;
 
-        while (s < n - 1) {
-            sum = arr[s];
-            if (sum > x) break;
+        while (s < e) {
+            sum = arr[s] + arr[e];
 
-            for (e = s + 1; e < n; e++) {
-                if (sum + arr[e] == x) answer++;
-                else if (sum + arr[e] > x) break;
+            if (sum == x) {
+                answer++;
+                s++;
+            } else if (sum < x) {
+                s++;
+            } else {
+                e--;
             }
-            s++;
         }
 
         bw.write(answer + "");
