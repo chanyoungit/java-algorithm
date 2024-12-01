@@ -26,7 +26,7 @@ public class Main {
         while (s <= e) {
             if (sum >= S) {
                 answer = Math.min(answer, e - s + 1);
-                if (s == e) break;
+//                if (s == e) break;
                 sum -= arr[s++];
             } else {
                 e++;
@@ -40,7 +40,7 @@ public class Main {
         } else {
             bw.write(answer + "");
         }
-        
+
         bw.close();
     }
 }
