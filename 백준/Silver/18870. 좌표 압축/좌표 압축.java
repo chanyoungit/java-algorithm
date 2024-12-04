@@ -21,20 +21,12 @@ public class Main {
 
         Arrays.sort(sort_arr);
 
-        int[] index = new int[N];
-        index[0] = 0;
-        for (int i = 1; i < N; i++) {
-            if (sort_arr[i] == sort_arr[i - 1]) {
-                index[i] = index[i - 1];
-            } else {
-                index[i] = index[i - 1] + 1;
-            }
-        }
-
         HashMap<Integer, Integer> map = new HashMap<>();
+        int rank = 0;
         for (int i = 0; i < N; i++) {
-            if (map.containsKey(sort_arr[i])) continue;
-            map.put(sort_arr[i], index[i]);
+            if (!map.containsKey(sort_arr[i])) {
+                map.put(sort_arr[i], rank++);
+            }
         }
 
         for (int i = 0; i < N; i++) {
