@@ -4,61 +4,57 @@ import java.util.*;
 public class Main {
 
     static int N, M;
-    static int[][] arr;
-    static ArrayList<Integer>[] al;
-    static boolean[] visited;
+    static int[][] city;
+    static int[] index;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
 
-        N = Integer.parseInt(br.readLine());    // 도시의 수
-        M = Integer.parseInt(br.readLine());    // 여행 계획에 속한 도시들의 수
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
 
-        arr = new int[N + 1][N + 1];
+        city = new int[N + 1][N + 1];
+
+        index = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            index[i] = i;
+        }
 
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
 
             for (int j = 1; j <= N; j++) {
-                arr[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-
-        al = new ArrayList[N + 1];
-        for (int i = 1; i <= N; i++) {
-            al[i] = new ArrayList<Integer>();
-        }
-
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                if (arr[i][j] == 1) {
-                    al[i].add(j);
-                    al[j].add(i);
+                city[i][j] = Integer.parseInt(st.nextToken());
+                if (city[i][j] == 1) {
+                    union(i, j);
                 }
             }
         }
 
-        visited = new boolean[N + 1];
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
+                if (city[i][j] == 1) {
+                    union(i, j);
+                }
+            }
+        }
 
         int[] answer = new int[M];
-
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
             answer[i] = Integer.parseInt(st.nextToken());
         }
 
-        dfs(answer[0]);
-
-        boolean bl = true;
-        for (int i = 0; i < M; i++) {
-            if (!visited[answer[i]]) {
-                bl = false;
+        boolean check = true;
+        for (int i = 0; i < M - 1; i++) {
+            if (index[answer[i]] != index[answer[i + 1]]) {
+                check = false;
             }
         }
 
-        if (bl) {
+        if (check) {
             bw.write("YES");
         } else {
             bw.write("NO");
@@ -67,15 +63,24 @@ public class Main {
         bw.close();
     }
 
-    public static void dfs(int s) {
-        visited[s] = true;
+    public static void union(int num1, int num2) {
+        int a = find(num1);
+        int b = find(num2);
 
-        for (int i : al[s]) {
-
-            if (!visited[i]) {
-                visited[i] = true;
-                dfs(i);
+        if (a != b) {
+            if (a > b) {
+                index[num1] = index[num2];
+            } else {
+                index[num2] = index[num1];
             }
+        }
+    }
+
+    public static int find(int a) {
+        if (index[a] == a) {
+            return a;
+        } else {
+            return index[a] = find(index[a]);
         }
     }
 }
