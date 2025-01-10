@@ -33,14 +33,6 @@ public class Main {
             }
         }
 
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                if (city[i][j] == 1) {
-                    union(i, j);
-                }
-            }
-        }
-
         int[] answer = new int[M];
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
@@ -69,9 +61,9 @@ public class Main {
 
         if (a != b) {
             if (a > b) {
-                index[num1] = index[num2];
+                index[a] = b;
             } else {
-                index[num2] = index[num1];
+                index[b] = a;
             }
         }
     }
