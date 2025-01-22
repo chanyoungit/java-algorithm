@@ -26,11 +26,11 @@ public class Main {
             }
         }
 
-//        for (int i = 1; i <= M; i++) {
-//            for (int j = 2; j <= N; j++) {
-//                dp[j][i] += dp[j - 1][i];
-//            }
-//        }
+        for (int i = 1; i <= M; i++) {
+            for (int j = 2; j <= N; j++) {
+                dp[j][i] += dp[j - 1][i];
+            }
+        }
 
         int K = Integer.parseInt(br.readLine());
 
@@ -42,17 +42,7 @@ public class Main {
             int endX = Integer.parseInt(st.nextToken());
             int endY = Integer.parseInt(st.nextToken());
 
-            int answer = 0;
-
-            if (startY != 1) {
-                for (int j = startX; j <= endX; j++) {
-                    answer += dp[j][endY] - dp[j][startY - 1];
-                }
-            } else {
-                for (int j = startX; j <= endX; j++) {
-                    answer += dp[j][endY];
-                }
-            }
+            int answer = dp[endX][endY] - dp[startX - 1][endY] - dp[endX][startY - 1] + dp[startX - 1][startY - 1];
 
             sb.append(answer + "\n");
         }
