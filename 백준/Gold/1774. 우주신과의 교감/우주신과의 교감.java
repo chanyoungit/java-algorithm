@@ -69,7 +69,7 @@ public class Main {
 
         for (int i = 1; i < N; i++) {
             for (int j = i + 1; j <= N; j++) {
-                if (find(i) != find(j)) {
+                if (index[i] != index[j]) {
                     double weight = cal(i, j);
                     queue.add(new Node(i, j, weight));
                 }
