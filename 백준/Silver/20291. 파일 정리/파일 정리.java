@@ -45,7 +45,7 @@ public class Main {
             char[] ch = str.toCharArray();
 
             boolean check = false;
-            String key = "";
+            StringBuilder key = new StringBuilder();
             for (int j = 0; j < ch.length; j++) {
                 if (ch[j] == '.') {
                     check = true;
@@ -53,11 +53,13 @@ public class Main {
                 }
 
                 if (check) {
-                    key += ch[j];
+                    key.append(ch[j]);
                 }
 
+                String lastKey = key.toString();
+
                 if (j == ch.length - 1) {
-                    map.put(key, map.getOrDefault(key, 0) + 1);
+                    map.put(lastKey, map.getOrDefault(lastKey, 0) + 1);
                 }
             }
         }
