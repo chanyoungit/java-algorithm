@@ -38,11 +38,7 @@ public class Main {
         StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
-        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
