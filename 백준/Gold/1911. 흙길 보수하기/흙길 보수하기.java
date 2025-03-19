@@ -71,17 +71,17 @@ public class Main {
 
         while (!queue.isEmpty()) {
             Node now = queue.poll();
-
-            if (now.e <= fillMax) {
-                continue;
-            }
+            
+            if (now.e <= fillMax) continue;
 
             if (now.s > fillMax) {
                 fillMax = now.s;
+            } else {
+                now.s = fillMax;
             }
 
-            int mod = (now.e - fillMax) / L;
-            int remain = (now.e - fillMax) % L;
+            int mod = (now.e - now.s) / L;
+            int remain = (now.e - now.s) % L;
 
             answer += mod;
             fillMax = now.e;
